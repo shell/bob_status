@@ -1,1 +1,1 @@
-puts Time.now
+puts "oh, hai #{Time.now}"
