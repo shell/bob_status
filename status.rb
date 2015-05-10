@@ -111,7 +111,7 @@ class Cache
   attr_accessor :cache
 
   def initialize
-    @file_path = File.join(File.path(__FILE__), 'cache.js')
+    @file_path = File.join(File.dirname(__FILE__), 'cache.js')
     File.write(@file_path, '{}') unless File.exists?(@file_path)
     @file = open(@file_path, 'r')
     contents = @file.read
