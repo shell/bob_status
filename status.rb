@@ -111,8 +111,9 @@ class Cache
   attr_accessor :cache
 
   def initialize
-    File.write('cache.js', '{}') unless File.exists?('cache.js')
-    @file = open('cache.js', 'r')
+    @file_path = File.join(File.path(__FILE__), 'cache.js')
+    File.write(@file_path, '{}') unless File.exists?(@file_path)
+    @file = open(@file_path, 'r')
     contents = @file.read
     @cache = JSON.parse(contents)['data'] || []
   end
@@ -137,7 +138,7 @@ class Cache
 
   def save
     @file.close
-    @file = open('cache.js', 'w')
+    @file = open(@file_path, 'w')
     @file.write({:data => @cache}.to_json)
     @file.close
   end
