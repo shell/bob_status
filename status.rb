@@ -14,7 +14,6 @@ class BobStatus
   end
 
   def post_status(commit)
-    return
     @client.create_status(@repo, commit[:sha], commit[:status], {
       :target_url => commit[:target_url],
       :context => 'Bobs status'
