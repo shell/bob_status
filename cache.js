@@ -1,1 +1,0 @@
-{"data":[{"sha":"f14e0434023cfb175b987f9177330792d60b3df9","status":"failure","target_url":"https://ci.rev.com:8443/job/Rev.com-featurebranch-build-feature_FOX-8596/8/","build_id":8,"created_at":"2015-05-08 07:29:40 +0300"}]}

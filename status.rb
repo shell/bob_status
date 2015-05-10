@@ -8,7 +8,7 @@ class BobStatus
     @repo = 'revdotcom/revdotcom'
     @jenkins_auth = auth = {:http_basic_authentication => ['vladimir', ENV['JENKINS_ACCESS_TOKEN']]}
     @client = Octokit::Client.new(:access_token => ENV['GITHUB_ACCESS_TOKEN'])
-    @feature_branch_view_url = "https://ci.rev.com:8443/view/Rev.com%20Feature%20Branch%20Builds/api/json"
+    @feature_branch_view_url = "https://ci.rev.com:8443/view/Rev.com%20Feature%20Branch%20Builds/api/json" # Feature branch view
     @requests_to_jenkins = 0
     @cache = Cache.new
   end
@@ -99,6 +99,7 @@ class BobStatus
     }
     @cache.save
 
+    puts "System time: #{Time.now}"
     puts "Requests to Jenkins made: #{@requests_to_jenkins}"
     puts "Statuses posted: #{posted}"
   end
@@ -111,6 +112,7 @@ class Cache
   attr_accessor :cache
 
   def initialize
+    File.write('cache.js', '{}') unless File.exists?('cache.js')
     @file = open('cache.js', 'r')
     contents = @file.read
     @cache = JSON.parse(contents)['data'] || []
@@ -145,3 +147,4 @@ end
 puts Benchmark.measure {
   BobStatus.new.run
 }
+puts "" # Empty line for pretty logs
