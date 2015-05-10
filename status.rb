@@ -71,7 +71,7 @@ class BobStatus
         status = build['result'].downcase
       end
 
-      build['url'] += 'console' unless status == 'failure' # link to error log if failed
+      build['url'] += 'console' if status == 'failure' # link to error log if failed
 
       {:sha => sha,
        :status => status,
